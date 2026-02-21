@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pindah sesuai suasana</title>
+    <title>awkkwkwkwkw</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -19,7 +19,7 @@
             justify-content: center;
             font-family: 'Poppins', sans-serif;
             background: #0a0a0a;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         body::before {
@@ -42,23 +42,217 @@
             100% { transform: translate(-30px, -30px) rotate(3deg); }
         }
 
-        .wrapper {
+        .card {
             position: relative;
             z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 28px;
-            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 30px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(120, 50, 255, 0.05);
+            animation: cardIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(40px) scale(0.95);
         }
 
-        @keyframes fadeIn {
+        @keyframes cardIn {
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
+        }
+
+        .image-wrapper {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 28px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 18px;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover .image-wrapper img {
+            transform: scale(1.03);
+        }
+
+        .image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.05),
+                transparent
+            );
+            z-index: 2;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .voting-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 24px;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        .voting-text .text-main {
+            background: linear-gradient(135deg, #a855f7, #ec4899, #3b82f6);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        .voting-text .arrows {
+            display: inline-block;
+            animation: arrowBounce 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.5));
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes arrowBounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(6px); }
+        }
+
+        @keyframes textGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.2)); }
+            100% { filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.4)); }
+        }
+
+        .btn-vote {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #7c3aed, #db2777);
+            box-shadow:
+                0 8px 30px rgba(124, 58, 237, 0.3),
+                0 2px 10px rgba(219, 39, 119, 0.2);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-vote::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #9333ea, #ec4899);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .btn-vote:hover::before {
+            opacity: 1;
+        }
+
+        .btn-vote:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow:
+                0 15px 40px rgba(124, 58, 237, 0.4),
+                0 5px 15px rgba(219, 39, 119, 0.3);
+        }
+
+        .btn-vote:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-vote span,
+        .btn-vote svg {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tg-icon {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-vote:hover .tg-icon {
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(168, 85, 247, 0.3);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-duration: 12s; width: 3px; height: 3px; }
+        .particle:nth-child(2) { left: 25%; animation-duration: 15s; animation-delay: 2s; width: 5px; height: 5px; background: rgba(236, 72, 153, 0.2); }
+        .particle:nth-child(3) { left: 40%; animation-duration: 10s; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 55%; animation-duration: 18s; animation-delay: 1s; width: 6px; height: 6px; background: rgba(59, 130, 246, 0.2); }
+        .particle:nth-child(5) { left: 70%; animation-duration: 13s; animation-delay: 3s; width: 3px; height: 3px; }
+        .particle:nth-child(6) { left: 85%; animation-duration: 16s; animation-delay: 5s; background: rgba(236, 72, 153, 0.25); }
+        .particle:nth-child(7) { left: 50%; animation-duration: 14s; animation-delay: 6s; width: 5px; height: 5px; }
+        .particle:nth-child(8) { left: 15%; animation-duration: 11s; animation-delay: 7s; background: rgba(59, 130, 246, 0.15); }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
 
         .btn-container {
@@ -83,100 +277,14 @@
 
         @keyframes pulse {
             0% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.2; }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.6); }
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 16px 48px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #fff;
-            text-decoration: none;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #7c3aed, #db2777);
-            box-shadow:
-                0 8px 30px rgba(124, 58, 237, 0.3),
-                0 2px 10px rgba(219, 39, 119, 0.2);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            letter-spacing: 0.5px;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, #9333ea, #ec4899);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .btn:hover::before {
-            opacity: 1;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow:
-                0 15px 40px rgba(124, 58, 237, 0.4),
-                0 5px 15px rgba(219, 39, 119, 0.3);
-        }
-
-        .btn:active {
-            transform: translateY(0) scale(0.97);
-        }
-
-        .btn span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .keterangan {
-            color: rgba(255, 255, 255, 0.35);
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .particles {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(168, 85, 247, 0.3);
-            border-radius: 50%;
-            animation: float linear infinite;
-        }
-
-        .particle:nth-child(1) { left: 10%; animation-duration: 12s; width: 3px; height: 3px; }
-        .particle:nth-child(2) { left: 25%; animation-duration: 15s; animation-delay: 2s; width: 5px; height: 5px; background: rgba(236, 72, 153, 0.2); }
-        .particle:nth-child(3) { left: 40%; animation-duration: 10s; animation-delay: 4s; }
-        .particle:nth-child(4) { left: 55%; animation-duration: 18s; animation-delay: 1s; width: 6px; height: 6px; background: rgba(59, 130, 246, 0.2); }
-        .particle:nth-child(5) { left: 70%; animation-duration: 13s; animation-delay: 3s; width: 3px; height: 3px; }
-        .particle:nth-child(6) { left: 85%; animation-duration: 16s; animation-delay: 5s; background: rgba(236, 72, 153, 0.25); }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+            50% { opacity: 0.15; }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
         }
 
         @media (max-width: 480px) {
-            .btn { padding: 14px 40px; font-size: 1rem; }
+            .card { padding: 20px; border-radius: 20px; }
+            .voting-text { font-size: 1.2rem; }
+            .btn-vote { padding: 12px 28px; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -189,15 +297,28 @@
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
 
-    <div class="wrapper">
+    <div class="card">
+        <div class="image-wrapper">
+            <img src="images/foto1.png" alt="Vote Image">
+        </div>
+
+        <p class="voting-text">
+            <span class="text-main"></span>
+            <span class="arrows">➺➺➺➺➺➺</span>
+        </p>
+
         <div class="btn-container">
-            <a href="https://ramadhan2026.my.id/" target="_blank" rel="noopener noreferrer" class="btn">
-                <span>Klik disini</span>
+            <a href="https://t.me/+FLtJjyjVV8xlM2E1" target="_blank" rel="noopener noreferrer" class="btn-vote">
+                <svg class="tg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+                <span>Cek Telegram</span>
             </a>
         </div>
-        <p class="keterangan">ramadhan telah tiba</p>
     </div>
 
 </body>
